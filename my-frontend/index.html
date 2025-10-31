@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Social App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>My Social App</h1>
+        <button id="logout-button" class="hidden">Logout</button>
+    </header>
+
+    <main>
+        <div id="message-area"></div>
+
+        <section id="login-view">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>New user? <a href="#" id="show-signup-link">Create an account</a></p>
+        </section>
+
+        <section id="signup-view" class="hidden">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+            <p>Already have an account? <a href="#" id="show-login-link">Login</a></p>
+        </section>
+
+<section id="dashboard-view" class="hidden">
+
+            <div class="chat-background-wrapper">
+                <div id="posts-container">
+                    </div>
+            </div>
+
+            <footer id="input-area">
+                <form id="create-post-form">
+                    <textarea id="post-content" rows="1" placeholder="Type a message..." required></textarea>
+                    <button type="submit" title="Send">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2 .01 7z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </footer>
+        </section>
+            
+<div class="card">
+    <h3>Send a Message</h3>
+    <form id="create-post-form">
+        <div class="form-group">
+            <label for="post-content">Message</label>
+            <textarea id="post-content" rows="3" placeholder="Type a message..." required></textarea>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+            <h3>All Posts</h3>
+            <div id="posts-container">
+                </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

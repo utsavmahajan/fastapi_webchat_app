@@ -1,0 +1,315 @@
+/* --- WhatsApp Fullscreen Theme --- */
+
+:root {
+    --wa-header-green: #008069;
+    --wa-teal: #00A884;
+    --wa-background: #E5DDD5;
+    --wa-my-bubble: #D9FDD3;
+    --wa-other-bubble: #FFFFFF;
+    --wa-text-primary: #111B21;
+    --wa-text-secondary: #667781;
+    --wa-form-card-bg: #F0F2F5;
+}
+
+/* Basic Reset & Font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--wa-text-primary);
+    line-height: 1.5;
+    /* This is critical: prevents scrolling on the body */
+    overflow: hidden; 
+}
+
+/* Header (Unchanged) */
+header {
+    background: var(--wa-header-green);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px; /* Set explicit height */
+}
+
+header h1 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Login/Signup Cards (Kept as cards) --- */
+main {
+    /* Remove all padding/margins */
+    padding: 0;
+    margin: 0;
+}
+
+/* Style for login/signup *only* */
+section#login-view,
+section#signup-view {
+    background: var(--wa-form-card-bg);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* Center the cards on the page */
+    max-width: 500px;
+    margin: 100px auto 20px auto;
+}
+
+
+/* --- Fullscreen Chat Layout --- */
+
+section#dashboard-view {
+    /* Override card styles */
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    
+    /* Full screen flex layout */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+}
+
+.chat-background-wrapper {
+    flex-grow: 1; /* Takes up all available space */
+    background-color: var(--wa-background);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAABGdBTUEAALGPC/xhBQAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjM2qefiJQAAABxJREFUCNdVxEENACAMAqD+yv+7l1sUhBJJ6LqP+4gUfQAcPMMQiwAAAABJRU5ErkJggg==");
+    /* The scrolling happens here */
+    overflow-y: auto;
+    /* Padding for fixed header and footer */
+    padding-top: 70px; /* header height + 10px */
+    padding-bottom: 70px; /* footer height + 10px */
+}
+
+#posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 10px; /* Side padding for bubbles */
+}
+
+
+/* --- New Input Footer --- */
+
+#input-area {
+    /* This is the new footer container */
+    flex-shrink: 0; /* Don't shrink */
+    background: var(--wa-form-card-bg);
+    padding: 8px 12px;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.05);
+}
+
+#create-post-form {
+    display: flex;
+    align-items: flex-end; /* Aligns button with bottom of textarea */
+    gap: 10px;
+}
+
+#post-content {
+    /* This is the new textarea style */
+    flex-grow: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    line-height: 1.4;
+    resize: none; /* Disable manual resize */
+    max-height: 120px; /* Limit height to ~5 lines */
+    overflow-y: auto;
+}
+
+#create-post-form button {
+    flex-shrink: 0; /* Don't shrink */
+    background: var(--wa-teal);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Circle */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+#create-post-form button:hover {
+    background: var(--wa-header-green);
+}
+
+
+/* --- Chat Bubble Styling (Unchanged) --- */
+
+.post-card {
+    width: fit-content;
+    max-width: 75%;
+    border: none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+}
+.my-post {
+    background-color: var(--wa-my-bubble);
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+.other-post {
+    background-color: var(--wa-other-bubble);
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+.post-author {
+    font-weight: bold;
+    color: var(--wa-teal);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+.my-post .post-author {
+    display: none;
+}
+.post-content-body {
+    font-size: 1rem;
+    word-wrap: break-word;
+}
+.post-content-body p {
+    margin-bottom: 0; /* No extra margin */
+}
+.post-bubble-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.post-timestamp {
+    font-size: 0.8rem;
+    color: var(--wa-text-secondary);
+    margin-left: 15px;
+}
+.post-actions button {
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--wa-text-primary);
+}
+.post-actions .votes {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--wa-text-secondary);
+}
+.post-actions .delete-btn {
+    font-size: 1rem;
+    color: var(--wa-delete-red);
+}
+.vote-btn, .unvote-btn, .delete-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.vote-btn:hover, .unvote-btn:hover, .delete-btn:hover {
+    background: transparent;
+    opacity: 0.7;
+}
+
+/* --- Login/Signup Form Styling (Unchanged) --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #FFFFFF;
+}
+section#login-view button,
+section#signup-view button {
+    background-color: var(--wa-teal);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+section#login-view button:hover,
+section#signup-view button:hover {
+    background-color: var(--wa-header-green);
+}
+#logout-button {
+    background-color: transparent;
+    border: 2px solid white;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+#logout-button:hover {
+    background-color: white;
+    color: var(--wa-header-green);
+}
+a {
+    color: var(--wa-teal);
+    text-decoration: none;
+    font-weight: 600;
+}
+a:hover {
+    text-decoration: underline;
+}
+#message-area {
+    padding: 10px;
+    margin: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    /* Make it appear over the content */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    max-width: 500px;
+    margin: 10px auto;
+}
+.message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.message-success {
+    background-color: #d4edda;
+    color: #155724;
+}
