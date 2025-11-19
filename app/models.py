@@ -13,6 +13,7 @@ class Post(Base):
                         nullable=False,server_default=text('now()'))
     owner_id = Column(Integer,ForeignKey("user.id",ondelete="CASCADE"),nullable=False)
     owner = relationship("User")
+    image_key = Column(String,nullable=True)
 
 class User(Base):
     __tablename__ = "user"

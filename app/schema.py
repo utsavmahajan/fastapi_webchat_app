@@ -20,7 +20,8 @@ class PostBase(BaseModel):
 
 
 class PostCreate(BaseModel):
-    content: str
+    content: Optional[str] = None
+    image_url : Optional[str] = None
     published: bool = True
 
 
@@ -48,5 +49,6 @@ class Vote(BaseModel):
 class PostOut(BaseModel):
     Post: Post
     votes: int
+    image_url : Optional[str] = None
     class Config:
         from_attributes = True
