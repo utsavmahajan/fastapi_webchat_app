@@ -1,0 +1,304 @@
+/* --- Blue & White Theme --- */
+
+:root {
+    --app-header-bg: #0078D4;       /* Strong Blue */
+    --app-accent: #005A9E;          /* Darker Blue */
+    --app-background: #E5E5E5;      /* Neutral Gray/White background */
+    --app-my-bubble: #D1E8FF;       /* Light Blue for my posts */
+    --app-other-bubble: #FFFFFF;    /* White for others */
+    --app-text-primary: #242424;
+    --app-text-secondary: #605e5c;
+    --app-form-bg: #F3F2F1;
+    --app-delete-red: #d13438;
+}
+
+/* Basic Reset & Font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--app-text-primary);
+    line-height: 1.5;
+    overflow: hidden; 
+}
+
+/* Header */
+header {
+    background: var(--app-header-bg);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+header h1 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Login/Signup Cards --- */
+main {
+    padding: 0;
+    margin: 0;
+}
+
+section#login-view,
+section#signup-view {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 100px auto 20px auto;
+}
+
+/* --- Fullscreen Chat Layout --- */
+section#dashboard-view {
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.chat-background-wrapper {
+    flex-grow: 1;
+    background-color: var(--app-background);
+    /* Subtle geometric pattern or just solid color */
+    background-image: radial-gradient(#d6d6d6 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow-y: auto;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+#posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 10px;
+}
+
+/* --- Input Footer --- */
+#input-area {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px 12px;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.05);
+}
+
+#create-post-form {
+    display: flex;
+    align-items: flex-end; 
+    gap: 10px;
+}
+
+/* File Input Styles */
+.file-upload-label {
+    cursor: pointer;
+    color: var(--app-text-secondary);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.file-upload-label:hover {
+    color: var(--app-accent);
+}
+
+#post-content {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    line-height: 1.4;
+    resize: none; 
+    max-height: 120px; 
+    overflow-y: auto;
+    font-family: inherit;
+}
+
+#create-post-form button[type="submit"] {
+    flex-shrink: 0;
+    background: var(--app-header-bg);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+#create-post-form button[type="submit"]:hover {
+    background: var(--app-accent);
+}
+
+/* --- Post/Bubble Styling --- */
+.post-card {
+    width: fit-content;
+    max-width: 75%;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.my-post {
+    background-color: var(--app-my-bubble);
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.other-post {
+    background-color: var(--app-other-bubble);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.post-author {
+    font-weight: bold;
+    color: var(--app-accent); /* Blue for names */
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.my-post .post-author {
+    display: none;
+}
+
+.post-content-body {
+    font-size: 1rem;
+    word-wrap: break-word;
+}
+
+/* Media inside posts */
+.post-media {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.post-bubble-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.post-timestamp {
+    font-size: 0.7rem;
+    color: var(--app-text-secondary);
+    margin-left: 10px;
+    align-self: flex-end;
+}
+
+.post-actions button {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--app-text-secondary);
+}
+
+.post-actions .votes {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--app-text-primary);
+}
+
+.post-actions .delete-btn {
+    font-size: 0.9rem;
+    color: var(--app-delete-red);
+}
+
+/* Login Inputs */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+section#login-view button,
+section#signup-view button {
+    background-color: var(--app-header-bg);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+a {
+    color: var(--app-header-bg);
+}
+
+/* Message Toast */
+#message-area {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    min-width: 200px;
+}
+.message-error { background: #fde7e9; color: #d13438; border: 1px solid #d13438; }
+.message-success { background: #dff6dd; color: #107c10; border: 1px solid #107c10; }
